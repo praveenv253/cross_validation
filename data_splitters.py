@@ -98,7 +98,7 @@ class KFold(DataSplitter):
         Decides whether or not index sets are to be randomized (default: False)
     """
 
-    def __init__(self, data_size, K, randomize):
+    def __init__(self, data_size, K, randomize=False):
         self._data_size = data_size
         self._K = K
 
@@ -117,7 +117,7 @@ class KFold(DataSplitter):
 
     def __iter__(self):
         for i in range(self._K):
-            if i <= self._num_extra:
+            if i < self._num_extra:
                 yield (self._indices[: i*(self._num_per_fold + 1)]
                        + self._indices[(i + 1)*(self._num_per_fold + 1) :],
                        self._indices[i*(self._num_per_fold + 1)
