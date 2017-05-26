@@ -81,6 +81,56 @@ class SingleFold(DataSplitter):
                slice(self._training_size, self._data_size))
 
 
+class KFold(DataSplitter):
+    """
+    Data splitter for K-fold cross validation. Creates K folds by partitioning
+    the data into K parts, each with roughly the same number of elements. In
+    each fold, the training set consists of all but one partition, which is
+    reserved for testing. The test partition iterates over folds.
+
+    Parameters
+    ----------
+    data_size: integer
+        Total number of data points being used for cross validation
+    K: integer
+        Number of folds desired
+    randomize: boolean (optional)
+        Decides whether or not index sets are to be randomized (default: False)
+    """
+
+    def __init__(self, data_size, K, randomize):
+        self._data_size = data_size
+        self._K = K
+
+        self._num_per_fold = data_size // K
+        self._num_extra = data_size % K
+
+        if randomize:
+            import numpy as np
+            self._indices = list(np.random.permutation(data_size))
+        else:
+            self._indices = list(range(data_size))
+
+    @property
+    def num_folds(self):
+        return self._K
+
+    def __iter__(self):
+        for i in range(self._K):
+            if i <= self._num_extra:
+                yield (self._indices[: i*(self._num_per_fold + 1)]
+                       + self._indices[(i + 1)*(self._num_per_fold + 1) :],
+                       self._indices[i*(self._num_per_fold + 1)
+                                     : (i + 1)*(self._num_per_fold + 1)])
+            else:
+                yield (self._indices[: i*self._num_per_fold + self._num_extra]
+                       + self._indices[((i + 1)*self._num_per_fold
+                                        + self._num_extra) :],
+                       self._indices[(i*self._num_per_fold + self._num_extra)
+                                     : ((i + 1)*self._num_per_fold
+                                        + self._num_extra)])
+
+
 class LeaveOneOut(DataSplitter):
     """
     Defines a data splitter that uses all but one of the data elements as
