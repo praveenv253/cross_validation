@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/praveenv253/cross_validation.svg?branch=master)](https://travis-ci.org/praveenv253/cross_validation)
+
 Cross Validation
 ================
 
