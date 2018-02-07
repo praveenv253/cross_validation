@@ -1,5 +1,5 @@
-__pycache__/*
-*.egg-info/*
-.eggs/*
-.cache/*
+__pycache__/
+*.egg-info/
+.eggs/
+.cache/
 .coverage
