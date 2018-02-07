@@ -4,7 +4,7 @@ python:
   - "2.7"
   - "3.4"
   - "3.5"
-  #- "3.6"
+  - "3.6"
 install:
   - sudo apt-get update
   # We do this conditionally because it saves us some downloading if the
@@ -20,7 +20,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a  # Useful for debugging any issues with conda
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pytest
+  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION numpy pytest
   - source activate test-environment
   - python setup.py install
   - pip install codecov pytest-cov codeclimate-test-reporter
@@ -30,8 +30,8 @@ cache:
     - $HOME/.cache/pip
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
-script: py.test --cov-report= --cov=polyproject tests/
+script: py.test --cov-report= --cov=cross_validation tests/
 after_success: codecov
 #addons:
 #  code_climate:
-#    repo_token: 5f858f87bc65c3cdcda1f0a977d5c40dc84cf9498d087eeaf5791a56edbb863e
+#    repo_token: 
