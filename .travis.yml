@@ -30,7 +30,7 @@ cache:
     - $HOME/.cache/pip
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
-script: py.test --cov-report= --cov=cross_validation tests/
+script: py.test --cov-report= --cov=cross_validation cross_validation/tests/
 after_success: codecov
 #addons:
 #  code_climate:
