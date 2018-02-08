@@ -102,5 +102,5 @@ def cross_validate(cv_data, data_splitter, estimator, estimator_params,
 
     if save_x_hats:
         return (lamda_stars, lamda_star_indices, error, mean_error, x_hats)
-    else:
-        return (lamda_stars, lamda_star_indices, error, mean_error)
+
+    return (lamda_stars, lamda_star_indices, error, mean_error)

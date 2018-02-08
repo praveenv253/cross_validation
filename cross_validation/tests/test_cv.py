@@ -2,6 +2,7 @@
 
 from __future__ import print_function, division
 
+from itertools import product
 import numpy as np
 
 from cross_validation import cross_validate
@@ -48,10 +49,15 @@ def test_cv():
     lamda2 = np.array([0.5, 5, 50])
     lamdas_list = [lamda1, lamda2]
 
-    ret = cross_validate(y, splitter, mle, params, lamdas_list,
-                         l2_error, params, save_x_hats=True)
+    for verbose, save_x_hats in product([True, False], [True, False]):
+        ret = cross_validate(y, splitter, mle, params, lamdas_list,
+                             l2_error, params, verbose, save_x_hats)
 
-    (lamda_stars, lamda_star_indices, error, mean_error, x_hats) = ret
-    print(mean_error)
-    assert lamda_star_indices[0] == 1
-    assert lamda_star_indices[1] == 1
+        if save_x_hats:
+            (lamda_stars, lamda_star_indices, error, mean_error, x_hats) = ret
+        else:
+            (lamda_stars, lamda_star_indices, error, mean_error) = ret
+
+        print(mean_error)
+        assert lamda_star_indices[0] == 1
+        assert lamda_star_indices[1] == 1
