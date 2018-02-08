@@ -26,6 +26,6 @@ before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
 script: py.test --cov-report= --cov=cross_validation cross_validation/tests/
 after_success: codecov
-#addons:
-#  code_climate:
-#    repo_token: 
+addons:
+  code_climate:
+    repo_token: df1431c51260c231971fdbf271d81b9eaee802d2d71c6232e6454edf973557d8
