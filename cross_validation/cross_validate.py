@@ -48,6 +48,7 @@ def cross_validate(cv_data, data_splitter, estimator, estimator_params,
     be computed using np.unravel_index.
     """
 
+    # NOTE: lamdas_list must be a tuple of *np.ndarrays*
     lamdas_sizes = tuple(lamdas.size for lamdas in lamdas_list)
     num_lamdas = np.prod(lamdas_sizes)
 
@@ -74,6 +75,7 @@ def cross_validate(cv_data, data_splitter, estimator, estimator_params,
                                                 estimator_params, state)
                 x_hat = np.empty((x_hat_temp.size, num_lamdas),
                                  dtype=x_hat_temp.dtype)
+                # NOTE: x_hat returned by the estimator must be 1D!
                 x_hat[:, i] = x_hat_temp
             else:
                 x_hat[:, i], state = estimator(training_data, lamdas,
