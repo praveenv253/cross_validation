@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/praveenv253/cross_validation.svg?branch=master)](https://travis-ci.org/praveenv253/cross_validation)
+[![Build Status](https://travis-ci.org/praveenv253/cross_validation.svg?branch=master)](https://travis-ci.org/praveenv253/cross_validation) [![codecov](https://codecov.io/gh/praveenv253/cross_validation/branch/master/graph/badge.svg)](https://codecov.io/gh/praveenv253/cross_validation) [![Maintainability](https://api.codeclimate.com/v1/badges/01166de1e95dfcdaec2e/maintainability)](https://codeclimate.com/github/praveenv253/cross_validation/maintainability)
 
 Cross Validation
 ================
