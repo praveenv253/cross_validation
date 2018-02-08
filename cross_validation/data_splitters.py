@@ -47,10 +47,10 @@ class DataSplitter(ABC):
     @property
     @abstractmethod
     def num_folds(self):
-        pass
+        raise NotImplementedError
 
     @abstractmethod
-    def __iter__(self):
+    def __iter__(self): #pragma: no cover
         while False:
             yield None
 

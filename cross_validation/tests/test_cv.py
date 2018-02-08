@@ -8,12 +8,23 @@ from cross_validation import cross_validate
 from cross_validation import data_splitters as ds
 
 
+def test_abc():
+    # Tests the abstract base class DataSplitter itself
+    obj = ds.LeaveOneOut(10)
+    bound_super_obj = super(ds.LeaveOneOut, obj)
+
+    import pytest
+    with pytest.raises(NotImplementedError, message='Expecting error'):
+        bound_super_obj.num_folds
+
+
 def test_single_fold():
     data = list(range(10))
 
     for i in range(10):
         splitter = ds.SingleFold(10, i)
         assert splitter.num_folds == 1
+
         for train, test in splitter:
             training_data = data[train]
             test_data = data[test]
